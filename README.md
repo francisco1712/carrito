@@ -1,5 +1,6 @@
 # carrito
 Proyecto de Base de Datos
+
 Mi página está casi acabada, la parte del front end y el login funcionan correctamente.
 Todavía queda por hacer el carrito funcionable, los roles de usuarios y el método de pago por paypal.
 Algunas de las páginas (acciones.php, opciones.php) que tengo son código experimental que he cogido de internet para ver como funcionan algunas opciones
