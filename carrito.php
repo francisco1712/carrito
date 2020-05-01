@@ -41,6 +41,14 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="index.php">Inicio <span class="sr-only">(current)</span></a>
                 </li>
+                <li class="nav-item dropdown show">
+                  <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Tienda</a>
+                  <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item nav-link bg-dark" href="global/videojuegos.php">Videojuegos</a>
+                    <a class="dropdown-item nav-link bg-dark" href="global/consolas.php">Consolas</a>
+                    <a class="dropdown-item nav-link bg-dark" href="global/merchandising.php">Merchandising</a>
+                  </div>
+                </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="carrito.php" tabindex="-1" aria-disabled="true">Carrito</a>
                 </li>

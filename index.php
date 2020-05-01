@@ -28,6 +28,8 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
   <link rel="stylesheet" type="text/css" href="css/estilos.css">
+  <link rel="stylesheet" href="cookies/cookiealert.css">
+  <script src="cookies/cookiealert-standalone.js"></script>
 </head>
 <body class="bg-dark">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -102,7 +104,7 @@
       </a>
     </div>
     <div class="container">
-      <h1 class="text-light">Productos Destacados</h1>
+      <h1 class="text-light text-center font-italic">Productos Destacados</h1>
       <div class="row">
         <div class="col-md-4 col-12 bg-light p-2">
           <img src="img/productos/xbox-s.jpg" class="img-fluid">
@@ -171,7 +173,7 @@
                     <img src="img/equipo.png" class="img-fluid float-right">
                   </h2>
               </div>
-              <div id="collapseOne" class="collapse w-50 p-2" aria-labelledby="headingOne" data-parent="#accordionExample">
+              <div id="collapseOne" id="texto" class="collapse p-2" aria-labelledby="headingOne" data-parent="#accordionExample">
                 <p>En la actualidad, Generación Xbox cuenta con un reducido equipo que hace posible la web. Sin embargo, siempre estamos en constante evolución y ninguna ayuda o talento sobra.</p><p>Nos dedicamos principalmente a la venta de consolas, videojuegos y todo lo relacionado con la marca verde y si estás interesado visita nuestra tienda con los mejores precios. Te esperamos!!</p>
               </div>
           </div>
@@ -235,4 +237,34 @@
       </div>
     </footer>
     <p class="text-center"><span class="text-secondary">© 2020 Copyright</span> <span class="text-white">FranciscoNavarro.com</span></p>
+    <div class="alert alert-dismissible text-center cookiealert" role="alert">
+      <div class="cookiealert-container">
+          <b>Te gustan las galletas?</b> &#x1F36A; Usamos cookies en nuestra página web para que tengas una mejor experiencia mientras navegas <a href="http://cookiesandyou.com/" target="_blank">Más información</a>
+
+          <button type="button" class="btn btn-primary btn-sm acceptcookies" aria-label="Close">
+              Estoy de acuerdo.
+          </button>
+      </div>
+    </div>  
 </html>
+<script src="https://cdn.jsdelivr.net/gh/Wruczek/Bootstrap-Cookie-Alert@gh-pages/cookiealert.js"></script>
+  <script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function() {
+      'use strict';
+      window.addEventListener('load', function() {
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.getElementsByClassName('needs-validation');
+        // Loop over them and prevent submission
+        var validation = Array.prototype.filter.call(forms, function(form) {
+          form.addEventListener('submit', function(event) {
+            if (form.checkValidity() === false) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+          }, false);
+        });
+      }, false);
+    })();
+  </script>
