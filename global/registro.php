@@ -70,16 +70,10 @@
         </div>
         
     </nav>
-	<div class="text-center">
-		<?php if(!empty($message)): ?>
-      		<p class="text-light bg-dark"> <?= $message ?></p>
-    	<?php endif; ?>
-	</div>
-	
 	<div class="row w-100">
 		<!-- Modal -->
 		<form action="registro.php" method="post" class="m-auto">
-			<div class="form w-100" id="registro" tabindex="-1" role="dialog" aria-labelledby="registro" aria-hidden="true">
+			<div class="form w-100 col-12" id="registro" tabindex="-1" role="dialog" aria-labelledby="registro" aria-hidden="true">
 				<div class="modal-dialog modal-dialog-centered" role="document">
 				   	<div class="modal-content">
 				      	<div class="modal-header bg-success text-dark">
@@ -107,6 +101,11 @@
 									<button type="submit" class="btn btn-success text-dark">Únete!!</button>
 								</div>
 				    		</form>
+				    		<div class="text-center">
+								<?php if(!empty($message)): ?>
+						      		<p class="text-light bg-dark"> <?= $message ?></p>
+						    	<?php endif; ?>
+							</div>
 				  		</div>
 					</div>
 				</div>

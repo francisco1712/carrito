@@ -12,6 +12,12 @@
     }
   }
 ?>
+<?php
+	require 'conection.php';
+	$sentencia=$conn->prepare("SELECT * FROM productos where categoria = 'consolas'");
+	$sentencia->execute();
+	$listaProductos=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,7 +58,9 @@
                   </div>
                 </li>
                 <li class="nav-item active">
-                  <a class="nav-link" href="carrito.php" tabindex="-1" aria-disabled="true">Carrito</a>
+                  <a class="nav-link" href="../carrito.php" tabindex="-1" aria-disabled="true">Carrito(
+                    <?php echo (empty($SESSION['CARRITO']))?0:count($SESSION['CARRITO']); ?>
+                  )</a>
                 </li>
             </ul>
             <div>
@@ -92,64 +100,28 @@
 	      </a>
     	</div>
     	<h1 class="text-light text-center font-italic">Las mejores consolas las encontrarás aquí</h1>
-    	<div class="container">
-    		<div class="row">
-		        <div class="col-md-4 col-12 p-2">
-		          <img src="../img/productos/consolas/x-s.jpg" class="img-fluid">
-		          <div class="bg-success p-2 rounded">
-		            <h4>Consolas</h4>
-		            <h5>Xbox One S 500GB</h5>
-		            <p>Precio: <strong>200.00€</strong></p>
-		            <form method="post" action="../carrito.php"  >
-		              <input type="hidden" name="id" id="id" value="3yxWbKC7GXanD/+NEF7Gag==">
-		              <input type="hidden" name="nombre" id="nombre" value="/rv0Lg+Br/9qlL8GJN5CfA==">
-		              <input type="hidden" name="precio" id="precio" value="5cZAYh6N6DhxvFm8Xwb44g==">
-		              <input type="hidden" name="categoria" id="Categoria" value="hcowuKkX8aX5mZZMaL6cKg==">
-		              <label>Cantidad: </label>
-		              <input type="number" name="cantidad" id="cantidad" min="1" max="10" size="1" required="" value="1">
-		              <br>
-		              <button class="btn btn-dark mt-2" name="btnaccion" value="Agregar" type="submit">Añadir a la cesta </button>
-		            </form>
-		          </div> 
-		        </div>
-		        <div class="col-md-4 col-12  p-2">
-		          <img src="../img/productos/consolas/x-cyber.jpg" class="img-fluid">
-		          <div class="bg-success p-2 rounded ">
-		            <h4>Consolas</h4>
-		            <h5>Xbox One X Cyberpunk 2077 Edition 1TB</h5>
-		            <p>Precio: <strong>500.00€</strong></p>
-		            <form method="post" action="../carrito.php"  >
-		              <input type="hidden" name="id" id="id" value="3yxWbKC7GXanD/+NEF7Gag==">
-		              <input type="hidden" name="nombre" id="nombre" value="/rv0Lg+Br/9qlL8GJN5CfA==">
-		              <input type="hidden" name="precio" id="precio" value="5cZAYh6N6DhxvFm8Xwb44g==">
-		              <input type="hidden" name="categoria" id="Categoria" value="hcowuKkX8aX5mZZMaL6cKg==">
-		              <label>Cantidad: </label>
-		              <input type="number" name="cantidad" id="cantidad" min="1" max="10" size="1" required="" value="1">
-		              <br>
-		              <button class="btn btn-dark mt-2" name="btnaccion" value="Agregar" type="submit">Añadir a la cesta </button>
-		            </form>
-		          </div> 
-		        </div>
-		        <div class="col-md-4 col-12 p-2">
-		          <img src="../img/productos/consolas/x-gears.jpg" class="img-fluid">
-		          <div class="bg-success p-2 rounded">
-		            <h4>Consolas</h4>
-		            <h5>Xbox One X Gears Limited Edition 1TB</h5>
-		            <p>Precio: <strong>350.00€</strong></p>
-		            <form method="post" action="../carrito.php"  >
-		              <input type="hidden" name="id" id="id" value="3yxWbKC7GXanD/+NEF7Gag==">
-		              <input type="hidden" name="nombre" id="nombre" value="/rv0Lg+Br/9qlL8GJN5CfA==">
-		              <input type="hidden" name="precio" id="precio" value="5cZAYh6N6DhxvFm8Xwb44g==">
-		              <input type="hidden" name="categoria" id="Categoria" value="hcowuKkX8aX5mZZMaL6cKg==">
-		              <label>Cantidad: </label>
-		              <input type="number" name="cantidad" id="cantidad" min="1" max="10" size="1" required="" value="1">
-		              <br>
-		              <button class="btn btn-dark mt-2" name="btnaccion" value="Agregar" type="submit">Añadir a la cesta </button>
-		            </form>
-		          </div> 
-		        </div>
-	      	</div>
-    	</div>
+    	<div class="row">
+	    		<?php foreach($listaProductos as $producto){ ?>
+					<div class="col-md-4 col-12 p-2">
+						<img src="<?php echo $producto['Imagen'] ?>" class="img-fluid">
+						<div class="bg-success p-2 rounded">
+							<h4><?php echo $producto['Nombre'] ?></h4>
+							<h5><?php echo $producto['Descripcion'] ?></h5>
+							<p>Precio: <strong><?php echo $producto['Precio'] ?>€</strong></p>
+							<form method="post" action="../carrito.php">
+								<input type="hidden" name="id" id="id" value="<?php echo openssl_encrypt($producto['id_Productos'],COD,KEY); ?>">
+								<input type="hidden" name="nombre" id="nombre" value="<?php echo openssl_encrypt($producto['Nombre'],COD,KEY); ?>">
+								<input type="hidden" name="precio" id="precio" value="<?php echo openssl_encrypt($producto['Precio'],COD,KEY); ?>">
+								<input type="hidden" name="categoria" id="Categoria" value="<?php echo openssl_encrypt($producto['Categoria'],COD,KEY); ?>">
+								<label>Cantidad: </label>
+								<input type="number" name="cantidad" id="cantidad" min="1" max="10" size="1" required value="1">
+								<br>
+								<button class="btn btn-dark mt-2" name="btnaccion" value="Agregar" type="submit">Añadir a la cesta </button>
+							</form>
+						</div> 
+					</div>
+				<?php } ?>
+	    </div>
     <footer class="row w-100">
       <div class="col-12" id="social">
           <a href="https://www.facebook.com/GeneracionXbox/" target="_blank"><img src="../img/facebook.png"></a>

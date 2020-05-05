@@ -5,5 +5,5 @@
 
   session_destroy();
 
-  header('Location: /php/carrito');
+  header('Location: /php/carrito-master');
 ?>

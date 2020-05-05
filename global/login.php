@@ -3,7 +3,7 @@
   session_start();
 
   if (isset($_SESSION['user_id'])) {
-    header('Location: /php/carrito');
+    header('Location: /php/carrito-master');
   }
   require 'conection.php';
 
@@ -16,7 +16,7 @@
     $message = '';
     if (!empty($results) > 0 && password_verify($_POST['pass'], $results['pass'])) {
       $_SESSION['user_id'] = $results['id'];
-      header("Location: /php/carrito");
+      header("Location: /php/carrito-master");
     } else {
       $message = 'Lo siento, las credenciales no son correctas';
     }
