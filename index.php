@@ -12,6 +12,12 @@
     }
   }
 ?>
+<?php
+  require 'global/conection.php';
+  $sentencia=$conn->prepare("SELECT * FROM productos where categoria = 'inicio'");
+  $sentencia->execute();
+  $listaProductos=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,7 +57,11 @@
                   </div>
                 </li>
                 <li class="nav-item active">
-                  <a class="nav-link" href="carrito.php" tabindex="-1" aria-disabled="true">Carrito</a>
+                  <li class="nav-item active">
+                    <a class="nav-link" href="carrito.php" tabindex="-1" aria-disabled="true">Carrito(
+                    <?php echo (empty($SESSION['CARRITO']))?0:count($SESSION['CARRITO']); ?>
+                  )</a>
+                </li>
                 </li>
             </ul>
             <div>
@@ -103,63 +113,29 @@
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
       </a>
     </div>
-    <div class="container">
+        <div class="container">
       <h1 class="text-light text-center font-italic">Productos Destacados</h1>
-      <div class="row">
-        <div class="col-md-4 col-12 bg-light p-2">
-          <img src="img/productos/xbox-s.jpg" class="img-fluid">
-          <div class="bg-success p-2 rounded">
-            <h4>Consolas</h4>
-            <h5>Xbox One S 500GB</h5>
-            <p>Precio: <strong>200.00€</strong></p>
-            <form method="post" action="carrito.php"  >
-              <input type="hidden" name="id" id="id" value="3yxWbKC7GXanD/+NEF7Gag==">
-              <input type="hidden" name="nombre" id="nombre" value="/rv0Lg+Br/9qlL8GJN5CfA==">
-              <input type="hidden" name="precio" id="precio" value="5cZAYh6N6DhxvFm8Xwb44g==">
-              <input type="hidden" name="categoria" id="Categoria" value="hcowuKkX8aX5mZZMaL6cKg==">
-              <label>Cantidad: </label>
-              <input type="number" name="cantidad" id="cantidad" min="1" max="10" size="1" required="" value="1">
-              <br>
-              <button class="btn btn-dark mt-2" name="btnaccion" value="Agregar" type="submit">Añadir a la cesta </button>
-            </form>
-          </div> 
-        </div>
-        <div class="col-md-4 col-12 bg-light p-2">
-          <img src="img/productos/xbox-gears.jpg" class="img-fluid">
-          <div class="bg-success p-2 rounded ">
-            <h4>Consolas</h4>
-            <h5>Xbox One X Gears Limited Edition 1TB</h5>
-            <p>Precio: <strong>400.00€</strong></p>
-            <form method="post" action="carrito.php"  >
-              <input type="hidden" name="id" id="id" value="3yxWbKC7GXanD/+NEF7Gag==">
-              <input type="hidden" name="nombre" id="nombre" value="/rv0Lg+Br/9qlL8GJN5CfA==">
-              <input type="hidden" name="precio" id="precio" value="5cZAYh6N6DhxvFm8Xwb44g==">
-              <input type="hidden" name="categoria" id="Categoria" value="hcowuKkX8aX5mZZMaL6cKg==">
-              <label>Cantidad: </label>
-              <input type="number" name="cantidad" id="cantidad" min="1" max="10" size="1" required="" value="1">
-              <br>
-              <button class="btn btn-dark mt-2" name="btnaccion" value="Agregar" type="submit">Añadir a la cesta </button>
-            </form>
-          </div> 
-        </div>
-        <div class="col-md-4 col-12 bg-light p-2">
-          <img src="img/productos/halo-5.jpg" class="img-fluid">
-          <div class="bg-success p-2 rounded">
-            <h4>Juegos</h4>
-            <h5>Halo 5: Guardians Collector Edition</h5>
-            <p>Precio: <strong>70.00€</strong></p>
-            <form method="post" action="carrito.php"  >
-              <input type="hidden" name="id" id="id" value="3yxWbKC7GXanD/+NEF7Gag==">
-              <input type="hidden" name="nombre" id="nombre" value="/rv0Lg+Br/9qlL8GJN5CfA==">
-              <input type="hidden" name="precio" id="precio" value="5cZAYh6N6DhxvFm8Xwb44g==">
-              <input type="hidden" name="categoria" id="Categoria" value="hcowuKkX8aX5mZZMaL6cKg==">
-              <label>Cantidad: </label>
-              <input type="number" name="cantidad" id="cantidad" min="1" max="10" size="1" required="" value="1">
-              <br>
-              <button class="btn btn-dark mt-2" name="btnaccion" value="Agregar" type="submit">Añadir a la cesta </button>
-            </form>
-          </div> 
-        </div>
+      <div class="row m-2">
+          <?php foreach($listaProductos as $producto){ ?>
+          <div class="col-md-4 col-11 p-2">
+            <img src="<?php echo $producto['Imagen'] ?>" class="img-fluid">
+            <div class="bg-success p-2 rounded">
+              <h4><?php echo $producto['Nombre'] ?></h4>
+              <h5><?php echo $producto['Descripcion'] ?></h5>
+              <p>Precio: <strong><?php echo $producto['Precio'] ?>€</strong></p>
+              <form method="post" action="carrito.php">
+                <input type="hidden" name="id" id="id" value="<?php echo openssl_encrypt($producto['ID'],COD,KEY); ?>">
+                <input type="hidden" name="nombre" id="nombre" value="<?php echo openssl_encrypt($producto['Nombre'],COD,KEY); ?>">
+                <input type="hidden" name="precio" id="precio" value="<?php echo openssl_encrypt($producto['Precio'],COD,KEY); ?>">
+                <input type="hidden" name="categoria" id="Categoria" value="<?php echo openssl_encrypt($producto['Categoria'],COD,KEY); ?>">
+                <label>Cantidad: </label>
+                <input type="number" name="cantidad" id="cantidad" min="1" max="10" size="1" required value="1">
+                <br>
+                <button class="btn btn-dark mt-2" name="btnaccion" value="Agregar" type="submit">Añadir a la cesta </button>
+              </form>
+            </div> 
+          </div>
+        <?php } ?>
       </div>
     </div>
     <div class="row m-2 bg-success p-2">
