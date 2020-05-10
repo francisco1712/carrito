@@ -19,7 +19,7 @@
   $listaProductos=$sentencia->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -72,8 +72,14 @@
                   <a href="global/logout.php" class="text-success">
                     Cerrar Sesión
                   </a>
-                </div>  
-              <?php endif; ?>
+                </div>
+                <?php if($user['email'] == 'francisconavarroblanco@gmail.com'): ?> 
+                  <div class="bg-dark text-light text-center">
+                    <h3>Pestaña de Administración</h3>
+                    <a href="global/administrador.php" class="text-success">Lista de productos</a> 
+                  </div>
+                <?php endif;?> 
+              <?php endif; ?>  
             </div>
             <div id="botones">
               <a href="global/registro.php" class="p-3 text-success"><strong>Regístrese</strong></a>
