@@ -1,6 +1,8 @@
+//CREDENCIALES PARA DESCODIFICAR LOS PRODUCTOS
 <?php 
     include 'global/config.php'; 
 ?>
+//MUESTRA EL USUARIO LOGEADO
 <?php
     require 'global/conection.php';
     if (isset($_SESSION['user_id'])) {
