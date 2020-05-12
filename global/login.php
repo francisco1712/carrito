@@ -1,12 +1,12 @@
 <?php
  
   session_start();
-
+  //SI YA HABÍA INICIADO SESIÓN, VUELVE AL INDEX
   if (isset($_SESSION['user_id'])) {
     header('Location: /php/carrito');
   }
   require 'conection.php';
-
+  //COMPRUEBA QUE LOS VALORES NO ESTÁN VACÍOS Y SE LOGEA
   if (!empty($_POST['email']) && !empty($_POST['pass'])) {
     $records = $conn->prepare('SELECT id, email, pass, nombre FROM clientes WHERE email = :email');
     $records->bindParam(':email', $_POST['email']);
@@ -14,6 +14,7 @@
     $results = $records->fetch(PDO::FETCH_ASSOC);
 
     $message = '';
+    //VERIFICACIÓN DE LA CONTRASEÑA, SI LA CONTRASEÑA NO ES VÁLIDA, MUESTRA UN MENSAJE
     if (!empty($results) > 0 && password_verify($_POST['pass'], $results['pass'])) {
       $_SESSION['user_id'] = $results['id'];
       header("Location: /php/carrito");

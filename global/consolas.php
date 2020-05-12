@@ -1,4 +1,5 @@
 <?php
+//SCRIPT PARA MOSTRAR EL USUARIO LOGEADO
     session_start();
     require 'conection.php';
     if (isset($_SESSION['user_id'])) {
@@ -13,6 +14,7 @@
   }
 ?>
 <?php
+//MUESTRA LOS PRODUCTOS DE LA CATEGORIA CONSOLAS
 	require 'conection.php';
 	$sentencia=$conn->prepare("SELECT * FROM productos where categoria = 'consolas'");
 	$sentencia->execute();
@@ -59,19 +61,26 @@
                 </li>
                 <li class="nav-item active">
                   <a class="nav-link" href="../carrito.php" tabindex="-1" aria-disabled="true">Carrito(
-                    <?php echo (empty($SESSION['CARRITO']))?0:count($SESSION['CARRITO']); ?>
+                    <?php echo (empty($SESSION['CARRITO']))?0:count($SESSION['CARRITO']); //CONTADOR DEL CARRITO?>
                   )</a>
                 </li>
             </ul>
             <div>
-              <?php if(!empty($user)): ?>
+              <?php if(!empty($user)): //SACA EL NOMBRE DEL USUARIO SI ESTÁ LOGEADO?>
                 <div class="bg-dark text-light text-center">
                   <h3> Hola de nuevo <?= $user['nombre']; ?></h3>
                   <br>Has iniciado sesión correctamente
                   <a href="logout.php" class="text-success">
                     Cerrar Sesión
                   </a>
-                </div>  
+                </div>
+                <?php if($user['email'] == 'francisconavarroblanco@gmail.com'): //SI EL USUARIO ES ADMIN, MUESTRA LA PESTAÑA DE ADMINISTRACIÓN?> 
+                  <div class="bg-dark text-light text-center">
+                    <h3>Pestaña de Administración</h3>
+                    <a href="../admin/administrador.php" class="text-success">Lista de productos</a>
+                    <a href="../admin/insertar-admin.php" class="text-success">Agregar nuevo producto</a> 
+                  </div>
+                <?php endif;?> 
               <?php endif; ?>
             </div>
             <div id="botones">

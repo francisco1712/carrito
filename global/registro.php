@@ -3,7 +3,7 @@
   require 'conection.php';
 
   $message = '';
-
+  //SI LOS VALORES NO SON NULOS, INGRESA EL NUEVO USUARIO EN LA BASE DE DATOS
   if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['nombre'])) {
     $sql = "INSERT INTO clientes (email, pass, nombre) VALUES (:email, :password, :nombre)";
     $stmt = $conn->prepare($sql);
@@ -11,7 +11,7 @@
     $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
     $stmt->bindParam(':password', $password);
     $stmt->bindParam(':nombre', $_POST['nombre']);
-
+    //CUANDO EJECUTA LA INSERCIÓN DEL USUARIO MUESTRA UN MENSAJE, SINO MUESTRA OTRO DE ERROR
     if ($stmt->execute()) {
       $message = 'Nuevo usuario creado con éxito';
     } else {
@@ -102,7 +102,7 @@
 								</div>
 				    		</form>
 				    		<div class="text-center">
-								<?php if(!empty($message)): ?>
+								<?php if(!empty($message)): //MENSAJE DE CONFIRMACIÓN DEL NUEVO USUARIO?>
 						      		<p class="text-light bg-dark"> <?= $message ?></p>
 						    	<?php endif; ?>
 							</div>

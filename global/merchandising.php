@@ -1,4 +1,5 @@
 <?php
+  //SCRIPT PARA EL LOGIN
     session_start();
     require 'conection.php';
     if (isset($_SESSION['user_id'])) {
@@ -13,6 +14,7 @@
   }
 ?>
 <?php
+  //MUESTRA LOS PRODUCTOS DE LA CATEGORÍA MERCH
 	require 'conection.php';
 	$sentencia=$conn->prepare("SELECT * FROM productos where categoria = 'merch'");
 	$sentencia->execute();
@@ -47,7 +49,7 @@
         <div id="my-nav" class="collapse navbar-collapse">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                  <a class="nav-link" href="index.php">Inicio <span class="sr-only">(current)</span></a>
+                  <a class="nav-link" href="../index.php">Inicio <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item dropdown show">
                   <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Tienda</a>
@@ -64,14 +66,21 @@
                 </li>
             </ul>
             <div>
-              <?php if(!empty($user)): ?>
+              <?php if(!empty($user)): //SACA EL NOMBRE DEL USUARIO SI ESTÁ LOGEADO?>
                 <div class="bg-dark text-light text-center">
                   <h3> Hola de nuevo <?= $user['nombre']; ?></h3>
                   <br>Has iniciado sesión correctamente
                   <a href="logout.php" class="text-success">
                     Cerrar Sesión
                   </a>
-                </div>  
+                </div>
+                <?php if($user['email'] == 'francisconavarroblanco@gmail.com'): //SI EL USUARIO ES ADMIN, MUESTRA LA PESTAÑA DE ADMINISTRACIÓN?> 
+                  <div class="bg-dark text-light text-center">
+                    <h3>Pestaña de Administración</h3>
+                    <a href="../admin/administrador.php" class="text-success">Lista de productos</a>
+                    <a href="../admin/insertar-admin.php" class="text-success">Agregar nuevo producto</a> 
+                  </div>
+                <?php endif;?> 
               <?php endif; ?>
             </div>
             <div id="botones">
