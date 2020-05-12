@@ -1,9 +1,10 @@
-//CREDENCIALES PARA DESCODIFICAR LOS PRODUCTOS
-<?php 
+
+<?php
+    //SCRIPT PARA DESCODIFICAR LOS PRODUCTOS 
     include 'global/config.php'; 
 ?>
-//MUESTRA EL USUARIO LOGEADO
 <?php
+    //MUESTRA EL USUARIO LOGEADO
     require 'global/conection.php';
     if (isset($_SESSION['user_id'])) {
     $records = $conn->prepare('SELECT id, email, pass, nombre FROM clientes WHERE id = :id');
@@ -65,7 +66,7 @@
     </nav>
     <div class="container">
         <h1>Tu Carrito</h1>
-        <?php if (!empty($_SESSION['CARRITO'])) { ?>
+        <?php if (!empty($_SESSION['CARRITO'])) { //SI EL CARRIRO ESTÁ VACIO MUESTRA UN ALERT, SINO CREA LA TABLA CON LOS PRODUCTOS?>
         <table class="table table-light table-bordered">
             <tbody>
                 <tr>

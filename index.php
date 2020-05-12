@@ -1,5 +1,5 @@
-//SCRIPT DE LOGIN
 <?php
+  //SCRIPT PARA MOSTRAR EL LOGIN
     session_start();
     require 'global/conection.php';
     if (isset($_SESSION['user_id'])) {
@@ -13,8 +13,8 @@
     }
   }
 ?>
-//MUESTRA LOS PRODUCTOS
 <?php
+  //SCRIPT PARA SACAR LOS PRODUCTOS
   require 'global/conection.php';
   $sentencia=$conn->prepare("SELECT * FROM productos where categoria = 'inicio'");
   $sentencia->execute();
@@ -61,13 +61,13 @@
                 <li class="nav-item active">
                   <li class="nav-item active">
                     <a class="nav-link" href="carrito.php" tabindex="-1" aria-disabled="true">Carrito(
-                    <?php echo (empty($SESSION['CARRITO']))?0:count($SESSION['CARRITO']); ?>
+                    <?php echo (empty($SESSION['user_id']))?0:count($SESSION['user_id']); ?>
                   )</a>
                 </li>
                 </li>
             </ul>
             <div>
-              <?php if(!empty($user)): ?>
+              <?php if(!empty($user)): //SACA EL NOMBRE DEL USUARIO SI ESTÁ LOGEADO?>
                 <div class="bg-dark text-light text-center">
                   <h3> Hola de nuevo <?= $user['nombre']; ?></h3>
                   <br>Has iniciado sesión correctamente
@@ -75,10 +75,11 @@
                     Cerrar Sesión
                   </a>
                 </div>
-                <?php if($user['email'] == 'francisconavarroblanco@gmail.com'): ?> 
+                <?php if($user['email'] == 'francisconavarroblanco@gmail.com'): //SI EL USUARIO ES ADMIN, MUESTRA LA PESTAÑA DE ADMINISTRACIÓN?> 
                   <div class="bg-dark text-light text-center">
                     <h3>Pestaña de Administración</h3>
-                    <a href="global/administrador.php" class="text-success">Lista de productos</a> 
+                    <a href="admin/administrador.php" class="text-success">Lista de productos</a>
+                    <a href="admin/insertar-admin.php" class="text-success">Agregar nuevo producto</a> 
                   </div>
                 <?php endif;?> 
               <?php endif; ?>  
@@ -233,13 +234,11 @@
 </html>
 <script src="https://cdn.jsdelivr.net/gh/Wruczek/Bootstrap-Cookie-Alert@gh-pages/cookiealert.js"></script>
   <script>
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    // SCRIPT EN JAVA PARA MOSTRAR UN MENSAJE DE COOKIES
     (function() {
       'use strict';
       window.addEventListener('load', function() {
-        // Fetch all the forms we want to apply custom Bootstrap validation styles to
         var forms = document.getElementsByClassName('needs-validation');
-        // Loop over them and prevent submission
         var validation = Array.prototype.filter.call(forms, function(form) {
           form.addEventListener('submit', function(event) {
             if (form.checkValidity() === false) {
