@@ -1,3 +1,4 @@
+//SCRIPT DE LOGIN
 <?php
     session_start();
     require 'global/conection.php';
@@ -12,6 +13,7 @@
     }
   }
 ?>
+//MUESTRA LOS PRODUCTOS
 <?php
   require 'global/conection.php';
   $sentencia=$conn->prepare("SELECT * FROM productos where categoria = 'inicio'");
