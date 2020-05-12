@@ -1,11 +1,24 @@
 # carrito
 Proyecto de Base de Datos
 
-Mi página está casi acabada, la parte del front end y el login funcionan correctamente.
-Todavía queda por hacer el carrito funcionable, los roles de usuarios y el método de pago por paypal.
-Algunas de las páginas (acciones.php, opciones.php) que tengo son código experimental que he cogido de internet para ver como funcionan algunas opciones
-relacionadas con las funciones que puede realizar el usuario registrado y para testear mi página mientras creo mi propio código.
+-Frontend acabado.
 
-Aquí dejo el enlace de mi página web subida a 000WebHost: http://francisconavarro.000webhostapp.com/carrito/
+-Logins y registros acabado.
+
+-Roles de usuarios admin, cliente e invitado funcionan.
+
+-Administración: Listado de productos con opción a eliminar el producto y una página aparte para añadir productos nuevos terminada.
+
+USUARIOS PARA PROBAR FUNCIONES DE ADMINISTRADOR Y ROLES:
+
+  -Admin: francisconavarroblanco@gmail.com -contraseña: Iliberis.18
+
+  -Usuario normal: juan@mail.com -contraseña: mellamojuan
+  
+PENDIENTE:
+
+  -Carrito funcional.
+
+Enlace de mi página web subida a 000WebHost: http://francisconavarro.000webhostapp.com/carrito/
 
 Un Saludo.
