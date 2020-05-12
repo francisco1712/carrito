@@ -1,7 +1,5 @@
 /*
- * Bootstrap Cookie Alert by Wruczek
- * https://github.com/Wruczek/Bootstrap-Cookie-Alert
- * Released under MIT license
+ * 
  */
 (function () {
     "use strict";
@@ -13,21 +11,20 @@
        return;
     }
 
-    cookieAlert.offsetHeight; // Force browser to trigger reflow (https://stackoverflow.com/a/39451131)
+    cookieAlert.offsetHeight; 
 
-    // Show the alert if we cant find the "acceptCookies" cookie
+    // MUESTRA EL MENSAJE SI ENCUENTRA LA COOKIE
     if (!getCookie("acceptCookies")) {
         cookieAlert.classList.add("show");
     }
 
-    // When clicking on the agree button, create a 1 year
-    // cookie to remember user's choice and close the banner
+    /*CUANDO ACEPTAS LA COOKIE, CREA UNA COOKIE DE UN AÑO Y SE CIERRA EL ALERT*/
     acceptCookies.addEventListener("click", function () {
         setCookie("acceptCookies", true, 365);
         cookieAlert.classList.remove("show");
     });
 
-    // Cookie functions from w3schools
+    // FUNCIONES DE LA COOKIE
     function setCookie(cname, cvalue, exdays) {
         var d = new Date();
         d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
